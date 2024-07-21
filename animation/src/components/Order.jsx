@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 const containerVariants = {
   hidden: {
@@ -31,13 +31,11 @@ const childVariants = {
   },
 };
 
-const Order = ({ pizza }) => {
-  
-  const [showTitle, setShowTitle] = useState(true)
-
-  setTimeout(()=>{
-    setShowTitle(false)
-  },4000)
+const Order = ({ pizza, setShowModal }) => {
+  // useEffect lifecycle hook, array with only setShowModal as dep
+  useEffect(() => {
+    setTimeout(() => setShowModal(true), 5000);
+  }, [setShowModal]);
 
   return (
     <motion.div
@@ -45,11 +43,9 @@ const Order = ({ pizza }) => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      exit="exit"
     >
-      <AnimatePresence>
-        {showTitle && <motion.h2 exit={{y:-1000}}>Thank you for your order :)</motion.h2>}
-      </AnimatePresence>
-
+      <h2>Thank you for your order :)</h2>
       <motion.p variants={childVariants}>
         You ordered a {pizza.base} pizza with:
       </motion.p>

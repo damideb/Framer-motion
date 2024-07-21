@@ -11,6 +11,10 @@ const containerVariants = {
     x: 0,
     transition: { type: "spring", delay: 0.5 },
   },
+  exit: {
+    x: "-100wh",
+    transition: { ease: "easeInOut" },
+  },
 };
 
 const nextVariants = {
@@ -33,6 +37,7 @@ const Base = ({ addBase, pizza }) => {
       initial="hidden"
       animate="visible"
       transition={{ type: "spring", delay: 0.5 }}
+      exit='exit'
     >
       <h3>Step 1: Choose Your Base</h3>
       <ul>

@@ -15,23 +15,36 @@ const Home = () => {
       }
     }
   }
+  const containerVariants = {
+    hidden: {
+      opacity: 0,
+    },
+    visible: {
+      opacity: 1,
+      transition: { delay: 1.5, duration: 1.5 },
+    },
+    exit: {
+      x: "-100vh",
+      transition: { ease: "easeInOut" },
+    },
+  };
+
   return (
-    <div className="home container">
-      <motion.h2 initial={{opacity:0}}
-        animate={{opacity:1}}
-        transition={{delay:1.5, duration:1.5}}
-      >
-        Welcome to Pizza Joint
-      </motion.h2>
+    <motion.div
+      className="home container"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+    >
+      <h2>Welcome to Pizza Joint</h2>
       <Link to="/base">
-        <motion.button 
-        variants={buttonVariant}
- whileHover='hover'>
+        <motion.button variants={buttonVariant} whileHover="hover">
           Create Your Pizza
         </motion.button>
       </Link>
-    </div>
-  )
+    </motion.div>
+  );
 }
 
 export default Home;
