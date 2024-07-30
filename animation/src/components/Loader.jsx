@@ -16,18 +16,33 @@ const loaderVariants = {
       },
     },
   },
+  animationTwo:{
+    y:[0,-40],
+    x:0,
+    transition:{
+      y:{
+        repeat:Infinity,
+        duration:0.25,
+        ease:'easeOut'
+      }
+    }
+  }
 };
 
 const Loader = () => {
-const[animation, useCylcleAnimation] = useCycle()
+const[animation, CylcleAnimation] = useCycle("animationOne", "animationTwo")
+
+
   return (
     <>
       <motion.div
         className="loader"
         variants={loaderVariants}
         onClick={() => "djd"}
-        animate="animationOne"
+        animate={animation}
       ></motion.div>
+
+      <div onClick={()=>CylcleAnimation()}>Cycle Loader</div>
     </>
   );
 };
