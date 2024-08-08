@@ -16,22 +16,21 @@ const loaderVariants = {
       },
     },
   },
-  animationTwo:{
-    y:[0,-40],
-    x:0,
-    transition:{
-      y:{
-        repeat:Infinity,
-        duration:0.25,
-        ease:'easeOut'
-      }
-    }
-  }
+  animationTwo: {
+    y: [0, -40],
+    x: 0,
+    transition: {
+      y: {
+        repeat: Infinity,
+        duration: 0.25,
+        ease: "easeOut",
+      },
+    },
+  },
 };
 
 const Loader = () => {
-const[animation, CylcleAnimation] = useCycle("animationOne", "animationTwo")
-
+  const [animation, CylcleAnimation] = useCycle("animationOne", "animationTwo");
 
   return (
     <>
@@ -42,7 +41,7 @@ const[animation, CylcleAnimation] = useCycle("animationOne", "animationTwo")
         animate={animation}
       ></motion.div>
 
-      <div onClick={()=>CylcleAnimation()}>Cycle Loader</div>
+      <div onClick={() => CylcleAnimation()}>Cycle Loader</div>
     </>
   );
 };
