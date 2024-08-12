@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import PropTypes from "prop-types";
 
 const containerVariants = {
   hidden: {
@@ -56,6 +57,14 @@ const Order = ({ pizza, setShowModal }) => {
       </motion.div>
     </motion.div>
   );
+};
+
+Order.propTypes = {
+  pizza: PropTypes.shape({
+    base: PropTypes.string,
+    toppings: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+  setShowModal:PropTypes.func.isRequired
 };
 
 export default Order;

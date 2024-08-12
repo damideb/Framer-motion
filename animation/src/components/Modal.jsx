@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import PropTypes from "prop-types";
 
 const backdrop = {
   visible: { opacity: 1 },
@@ -36,6 +37,10 @@ const Modal = ({ showModal }) => {
       )}
     </AnimatePresence>
   );
+};
+
+Modal.propTypes = {
+  showModal: PropTypes.bool.isRequired,
 };
 
 export default Modal;

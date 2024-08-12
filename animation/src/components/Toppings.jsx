@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import PropTypes from "prop-types";
 
 const Toppings = ({ addTopping, pizza }) => {
   let toppings = [
@@ -37,4 +38,14 @@ const Toppings = ({ addTopping, pizza }) => {
   );
 };
 
+Toppings.propTypes = {
+  addTopping: PropTypes.func.isRequired,
+  pizza: PropTypes.shape({
+    base: PropTypes.string,
+    toppings: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+};
+
 export default Toppings;
+
+
