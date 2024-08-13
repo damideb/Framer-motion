@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import PropTypes from 'prop-types'
 
 const containerVariants = {
   hidden: {
@@ -73,6 +74,13 @@ const Base = ({ addBase, pizza }) => {
       )}
     </motion.div>
   );
+};
+
+Base.propTypes = {
+  addBase: PropTypes.func.isRequired,
+  pizza: PropTypes.shape({
+    base: PropTypes.string.isRequired
+})
 };
 
 export default Base;
