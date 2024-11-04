@@ -7,6 +7,7 @@ import Toppings from "./components/Toppings";
 import Order from "./components/Order";
 import { AnimatePresence } from "framer-motion";
 import Modal from "./components/Modal";
+import Form from "./components/Form";
 
 function App() {
   const [pizza, setPizza] = useState({ base: "", toppings: [] });
@@ -65,6 +66,7 @@ function App() {
           />
 
           <Route path="/" element={<Home />} />
+          <Route  path="/form" element={<Form/>}/>
         </Routes>
       </AnimatePresence>
     </>
