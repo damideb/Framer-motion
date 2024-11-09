@@ -1,44 +1,63 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 export default function Form() {
   const form = useForm({
     defaultValues: {
-        username:'Dami',
-        email:'',
-        channel:'',
-        social:{
-            facebook:''
-        },
-        phoneNumbers:['', ''],
-        age:0
-    }
+      username: "Dami",
+      email: "",
+      channel: "",
+      social: {
+        facebook: "",
+      },
+      phoneNumbers: ["", ""],
+      age: 0,
+    },
   });
 
-  const { register, handleSubmit, formState, watch, getValues, setValue } = form;
+  const { register, handleSubmit, formState, watch, getValues, setValue, reset } =
+    form;
 
-  const { errors } = formState;
+  const { errors, isDirty,isValid, isSubmitSuccessful, isSubmitting, isSubmitted } = formState;
+
+
+  useEffect(()=>{
+    if(isSubmitSuccessful){
+      reset(); //advisable not to rese form onSubmit
+    }
+
+ 
+  }, [isSubmitSuccessful])
+
   const submitForm = (data) => {
     console.log("form submited", data);
   };
 
- const age = watch('age')    
- console.log(age) 
+  const age = watch("age");
+  console.log(age);
 
- const handleClick = ()=>{
-    console.log(getValues())
- }
+  const handleClick = () => {
+    console.log(getValues());
+  };
 
- const handlSetValue = ()=>{
-    setValue("age", 25,{
-        shouldValidate: true,
-        shouldDirty: true,
-        shouldTouch: true,
-  
-    })
- }
+  const handlSetValue = () => {
+    setValue("age", 25, {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
+  };
+
+  const onError = (error) => { // second parameter to the handle submit event to handle form submission errors
+    console.log("error", error);
+  };
   return (
     <div>
-      <form className="form" onSubmit={handleSubmit(submitForm)} noValidate>
+      <form
+        className="form"
+        onSubmit={handleSubmit(submitForm, onError)}
+        noValidate
+      >
         <label htmlFor="username">Username</label>
         <input
           type="text"
@@ -101,9 +120,13 @@ export default function Form() {
         <p>{errors.channel?.message}</p>
 
         <label htmlFor="facebook">Facebook</label>
-        <input type="text" id="facebook" {...register("social.facebook",{
-            disabled: watch('channel')===""
-        })} />
+        <input
+          type="text"
+          id="facebook"
+          {...register("social.facebook", {
+            disabled: watch("channel") === "",
+          })}
+        />
 
         <label htmlFor="primary Number"> Primary phoneNumber</label>
         <input
@@ -118,8 +141,9 @@ export default function Form() {
           id="secondary Number"
           {...register("phoneNumbers.1")}
         />
-        <button type="submit">submit</button>
+        <button type="submit" disabled={!isDirty || !isValid}>submit</button>
       </form>
+      <button onClick={()=>reset()}>Reset</button>
       <button type="button" onClick={handleClick}>
         Get Value
       </button>
